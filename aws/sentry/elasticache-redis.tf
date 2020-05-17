@@ -31,6 +31,8 @@ variable "redis_params" {
   description = "A list of Redis parameters to apply. Note that parameters may differ from a Redis family to another"
 }
 
+
+
 module "elasticache_redis" {
   source                       = "git::https://github.com/cloudposse/terraform-aws-elasticache-redis.git?ref=tags/0.13.0"
   enabled                      = var.redis_cluster_enabled
@@ -59,6 +61,7 @@ module "elasticache_redis" {
 
   parameter = var.redis_params
 }
+
 
 resource "aws_ssm_parameter" "elasticache_redis_host" {
   count       = local.postgres_cluster_enabled ? 1 : 0
